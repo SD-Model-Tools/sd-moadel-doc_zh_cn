@@ -1,0 +1,16 @@
+# 排除构建生成的site文件夹
+/site/
+
+# 其他常见需要排除的文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.DS_Store

@@ -1,0 +1,22 @@
+site_name: Models Train Docs
+repo_url: https://github.com/SD-Model-Tools/sd-moadel-doc_zh_cn
+nav:
+  - Home: index.md
+  - SD-Scripts-Docs: 
+      - 数据准备: 
+          - 数据集配置: sd-scripts-docs\config.md
+          - 蒙版数据: sd-scripts-docs\masked_loss.md
+          - 打标: sd-scripts-docs\wd14_tagger.md
+      - 模型训练:
+          - 微调训练: sd-scripts-docs\fine_tune.md
+          - 模型训练: sd-scripts-docs\train.md
+          - Lora-模型训练: sd-scripts-docs\train_network.md
+          - DreamBooth-模型训练: sd-scripts-docs\train_db.md
+          - Textual-Inversion-模型训练: sd-scripts-docs\train_ti.md
+          - ControlNet-LLLite-模型训练: sd-scripts-docs\train_lllite.md
+          - SDXL-模型训练: sd-scripts-docs\train_SDXL.md
+          - SDXL-Lora-模型训练: sd-scripts-docs\sdxl_train_network.md
+          - SD3-模型训练: sd-scripts-docs\sd3_train_network.md
+          - Flux-模型训练: sd-scripts-docs\flux_train.md
+      - 图像生成: sd-scripts-docs\gen_img.md
+# theme: readthedocs
