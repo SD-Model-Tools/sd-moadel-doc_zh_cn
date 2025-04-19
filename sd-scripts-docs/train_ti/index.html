@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Textual-Inversion-模型训练 - Models Train Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Models Train Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">SD-Scripts-Docs</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">数据准备</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../config/" class="dropdown-item">数据集配置</a>
+</li>
+            
+<li>
+    <a href="../masked_loss/" class="dropdown-item">蒙版数据</a>
+</li>
+            
+<li>
+    <a href="../wd14_tagger/" class="dropdown-item">打标</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">模型训练</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../fine_tune/" class="dropdown-item">微调训练</a>
+</li>
+            
+<li>
+    <a href="../train/" class="dropdown-item">模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_network/" class="dropdown-item">Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_db/" class="dropdown-item">DreamBooth-模型训练</a>
+</li>
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">Textual-Inversion-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_lllite/" class="dropdown-item">ControlNet-LLLite-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_SDXL/" class="dropdown-item">SDXL-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sdxl_train_network/" class="dropdown-item">SDXL-Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sd3_train_network/" class="dropdown-item">SD3-模型训练</a>
+</li>
+            
+<li>
+    <a href="../flux_train/" class="dropdown-item">Flux-模型训练</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li>
+    <a href="../gen_img/" class="dropdown-item">图像生成</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../train_db/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../train_lllite/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/SD-Model-Tools/sd-moadel-doc_zh_cn/edit/master/docs/sd-scripts-docs/train_ti.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">学习步骤</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">数据准备</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">执行学习</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#textual-inversion_1" class="nav-link">Textual Inversion 的其他主要选项</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_5" class="nav-link">使用此存储库中的图像生成脚本生成图像</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>这是关于 <a href="https://textual-inversion.github.io/">Textual Inversion</a> 学习的说明。</p>
+<p>请同时参考<a href="../train/">关于学习的共同文档</a>。</p>
+<p>在实现时，我们大量参考了 https://github.com/huggingface/diffusers/tree/main/examples/textual_inversion。</p>
+<p>学习的模型可以直接在 Web UI 中使用。</p>
+<h1 id="_1">学习步骤</h1>
+<p>请预先参考此存储库的 README，进行环境设置。</p>
+<h2 id="_2">数据准备</h2>
+<p>请参考<a href="../train/">关于学习数据的准备</a>。</p>
+<h2 id="_3">执行学习</h2>
+<p>使用 <code>train_textual_inversion.py</code>。以下是命令行示例（DreamBooth 方法）。</p>
+<pre><code>accelerate launch --num_cpu_threads_per_process 1 train_textual_inversion.py 
+    --dataset_config=&lt;数据准备时创建的.toml文件&gt; 
+    --output_dir=&lt;学习模型的输出文件夹&gt;  
+    --output_name=&lt;学习模型输出时的文件名&gt; 
+    --save_model_as=safetensors 
+    --prior_loss_weight=1.0 
+    --max_train_steps=1600 
+    --learning_rate=1e-6 
+    --optimizer_type=&quot;AdamW8bit&quot; 
+    --xformers 
+    --mixed_precision=&quot;fp16&quot; 
+    --cache_latents 
+    --gradient_checkpointing
+    --token_string=mychar4 --init_word=cute --num_vectors_per_token=4
+</code></pre>
+<p>在 <code>--token_string</code> 中指定学习时的标记字符串。<strong>学习时的提示词必须包含此字符串</strong>（如果 token_string 是 mychar4，则为 <code>mychar4 1girl</code> 等）。提示词中的此字符串部分将被替换为 Textual Inversion 的新标记并进行学习。最简单且最可靠的方法是使用 DreamBooth、class+identifier 形式的数据集，并将 <code>token_string</code> 作为标记字符串。</p>
+<p>要检查提示词中是否包含标记字符串，可以使用 <code>--debug_dataset</code> 查看替换后的 token id。如果存在 <code>49408</code> 之后的 token，则表示包含标记字符串。</p>
+<pre><code>input ids: tensor([[49406, 49408, 49409, 49410, 49411, 49412, 49413, 49414, 49415, 49407,
+         49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407,
+         49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407,
+         49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407,
+         49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407,
+         49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407,
+         49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407, 49407,
+         49407, 49407, 49407, 49407, 49407, 49407, 49407]])
+</code></pre>
+<p>不能使用分词器已经拥有的单词（常见单词）。</p>
+<p>在 <code>--init_word</code> 中指定初始化 embeddings 时的复制源标记字符串。选择与要学习的 concept 接近的单词似乎比较好。不能指定由两个以上标记组成的字符串。</p>
+<p>在 <code>--num_vectors_per_token</code> 中指定在此学习中使用多少个标记。数量越多，表现力越强，但也会占用更多的标记。例如，如果 num_vectors_per_token=8，则指定的标记字符串将占用（一般提示词的 77 个标记限制中的）8 个标记。</p>
+<p>以上是 Textual Inversion 的主要选项。之后与其他学习脚本相同。</p>
+<p><code>num_cpu_threads_per_process</code> 通常指定为 1。</p>
+<p>在 <code>pretrained_model_name_or_path</code> 中指定作为基础进行额外学习的模型。可以指定 Stable Diffusion 的 checkpoint 文件（.ckpt 或 .safetensors）、Diffusers 的本地磁盘上的模型目录、Diffusers 的模型 ID（例如 "stabilityai/stable-diffusion-2"）。</p>
+<p>在 <code>output_dir</code> 中指定学习后的模型的保存文件夹。在 <code>output_name</code> 中指定模型的文件名（不包括扩展名）。通过 <code>save_model_as</code> 指定保存为 safetensors 格式。</p>
+<p>在 <code>dataset_config</code> 中指定 <code>.toml</code> 文件。在文件内，初始时请将批处理大小指定为 <code>1</code> 以减少内存消耗。</p>
+<p>将学习步数 <code>max_train_steps</code> 指定为 10000。这里将学习率 <code>learning_rate</code> 指定为 5e-6。</p>
+<p>为了减少内存使用，指定 <code>mixed_precision="fp16"</code>（在 RTX30 系列之后，可以指定 <code>bf16</code>。请与在环境设置时对 accelerate 进行的设置保持一致）。同时指定 <code>gradient_checkpointing</code>。</p>
+<p>为了使用内存消耗较少的 8bit AdamW 作为优化器（将模型优化以适应学习数据），指定 <code>optimizer_type="AdamW8bit"</code>。</p>
+<p>指定 <code>xformers</code> 选项，使用 xformers 的 CrossAttention。如果未安装 xformers 或出现错误（在某些环境下，例如 <code>mixed_precision="no"</code>），可以指定 <code>mem_eff_attn</code> 选项以使用节省内存的 CrossAttention（速度会变慢）。</p>
+<p>如果内存足够，可以编辑 <code>.toml</code> 文件，将批处理大小增加到例如 <code>8</code>（可能会提高速度和精度）。</p>
+<h3 id="_4">关于常用选项</h3>
+<p>在以下情况下，请参考有关选项的文档。</p>
+<ul>
+<li>学习 Stable Diffusion 2.x 或其派生模型</li>
+<li>学习 clip skip 为 2 或以上的模型</li>
+<li>使用超过 75 个标记的标题进行学习</li>
+</ul>
+<h3 id="textual-inversion">关于 Textual Inversion 的批处理大小</h3>
+<p>与学习整个模型的 DreamBooth 和 fine tuning 相比，Textual Inversion 的内存使用量较少，因此可以设置较大的批处理大小。</p>
+<h1 id="textual-inversion_1">Textual Inversion 的其他主要选项</h1>
+<p>有关所有选项，请参考其他文档。</p>
+<ul>
+<li><code>--weights</code></li>
+<li>在学习之前加载已学习的 embeddings，并从那里继续学习。</li>
+<li><code>--use_object_template</code></li>
+<li>不使用标题，而是使用预设的物体模板字符串（例如 <code>a photo of a {}</code>）进行学习。这与官方实现相同。标题将被忽略。</li>
+<li><code>--use_style_template</code></li>
+<li>不使用标题，而是使用预设的样式模板字符串（例如 <code>a painting in the style of {}</code>）进行学习。这与官方实现相同。标题将被忽略。</li>
+</ul>
+<h2 id="_5">使用此存储库中的图像生成脚本生成图像</h2>
+<p>在 gen_img_diffusers.py 中，使用 <code>--textual_inversion_embeddings</code> 选项指定学习的 embeddings 文件（可指定多个）。在提示词中使用 embeddings 文件的文件名（不包括扩展名），将应用相应的 embeddings。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

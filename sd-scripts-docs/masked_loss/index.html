@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>蒙版数据 - Models Train Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Models Train Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">SD-Scripts-Docs</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">数据准备</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../config/" class="dropdown-item">数据集配置</a>
+</li>
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">蒙版数据</a>
+</li>
+            
+<li>
+    <a href="../wd14_tagger/" class="dropdown-item">打标</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">模型训练</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../fine_tune/" class="dropdown-item">微调训练</a>
+</li>
+            
+<li>
+    <a href="../train/" class="dropdown-item">模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_network/" class="dropdown-item">Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_db/" class="dropdown-item">DreamBooth-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_ti/" class="dropdown-item">Textual-Inversion-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_lllite/" class="dropdown-item">ControlNet-LLLite-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_SDXL/" class="dropdown-item">SDXL-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sdxl_train_network/" class="dropdown-item">SDXL-Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sd3_train_network/" class="dropdown-item">SD3-模型训练</a>
+</li>
+            
+<li>
+    <a href="../flux_train/" class="dropdown-item">Flux-模型训练</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li>
+    <a href="../gen_img/" class="dropdown-item">图像生成</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../config/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../wd14_tagger/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/SD-Model-Tools/sd-moadel-doc_zh_cn/edit/master/docs/sd-scripts-docs/masked_loss.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">关于掩码损失</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">训练时的注意事项</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>masked_loss.md</p>
+<h2 id="_1">关于掩码损失</h2>
+<p>掩码损失是一种通过输入图像的掩码来指定部分区域进行损失计算，从而实现仅对图像的特定部分进行训练的功能。例如，当你想训练一个角色时，可以通过仅对角色部分进行掩码来忽略背景的影响。
+掩码损失有两种指定掩码的方法：
+- 使用掩码图像
+- 使用透明度（Alpha通道）
+本文档的示例使用了  中的“AI图像模型用训练数据”。</p>
+<h3 id="_2">使用掩码图像的方法</h3>
+<p>这种方法需要为每张训练图像准备对应的掩码图像。掩码图像应与训练图像具有相同的文件名，并存储在不同的目录中。
+- 训练图像
+  <img alt="image-0" src="../img/334094483-607c5116-5f62-47de-8b66-9c4a597f0441.png" />
+- 掩码图像
+  <img alt="image" src="../img/334094678-53e9b0f8-a4bf-49ed-882d-4026f84e8450.png" /></p>
+<pre><code class="language-toml">[[datasets.subsets]]
+image_dir = &quot;/path/to/a_zundamon&quot;
+caption_extension = &quot;.txt&quot;
+conditioning_data_dir = &quot;/path/to/a_zundamon_mask&quot;
+num_repeats = 8
+</code></pre>
+<p>掩码图像应与训练图像大小相同，其中需要训练的区域用白色表示，不需要训练的区域用黑色表示。该功能支持灰度掩码（例如，值为127的像素对应的损失权重为0.5）。实际上，掩码图像的R通道将被使用。
+对于DreamBooth方式的数据集，你需要将掩码图像保存在<code>conditioning_data_dir</code>指定的目录中。有关更多详细信息，请参考 <a href="../train_lllite/">ControlNet-LLLite</a>。</p>
+<h3 id="alpha">使用透明度（Alpha通道）的方法</h3>
+<p>这种方法使用训练图像的透明度（Alpha通道）作为掩码。透明度为0的区域将被忽略，而透明度为255的区域将被用于训练。对于半透明区域，其损失权重将根据其透明度进行调整（例如，透明度为127的像素对应的损失权重约为0.5）。
+<img alt="image" src="../img/334095072-0baa129b-446a-4aac-b98c-7208efb0e75e.png" />
+<em>上述图像均为PNG格式并带有透明通道</em>
+在训练时，你需要在脚本的选项中添加<code>--alpha_mask</code>，或者在数据集的配置文件中的subset部分设置<code>alpha_mask</code>。例如：</p>
+<pre><code class="language-toml">[[datasets.subsets]]
+image_dir = &quot;/path/to/image/dir&quot;
+caption_extension = &quot;.txt&quot;
+num_repeats = 8
+alpha_mask = true
+</code></pre>
+<h2 id="_3">训练时的注意事项</h2>
+<ul>
+<li>目前仅支持DreamBooth方式的数据集。</li>
+<li>掩码将在latents尺寸（即原始图像的1/8）下应用。因此，细小的部分（例如刘海或耳环等）可能无法被很好地训练。你可能需要对掩码进行一些调整，比如稍微扩大掩码区域。</li>
+<li>使用掩码损失时，可能不需要在图像的描述文本中包含不被掩码的部分。（待验证）</li>
+<li>当使用<code>alpha_mask</code>时，切换掩码的有无将自动重新生成latents缓存。</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

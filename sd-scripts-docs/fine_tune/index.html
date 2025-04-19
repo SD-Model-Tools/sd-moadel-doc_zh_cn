@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>微调训练 - Models Train Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Models Train Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">SD-Scripts-Docs</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">数据准备</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../config/" class="dropdown-item">数据集配置</a>
+</li>
+            
+<li>
+    <a href="../masked_loss/" class="dropdown-item">蒙版数据</a>
+</li>
+            
+<li>
+    <a href="../wd14_tagger/" class="dropdown-item">打标</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">模型训练</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">微调训练</a>
+</li>
+            
+<li>
+    <a href="../train/" class="dropdown-item">模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_network/" class="dropdown-item">Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_db/" class="dropdown-item">DreamBooth-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_ti/" class="dropdown-item">Textual-Inversion-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_lllite/" class="dropdown-item">ControlNet-LLLite-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_SDXL/" class="dropdown-item">SDXL-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sdxl_train_network/" class="dropdown-item">SDXL-Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sd3_train_network/" class="dropdown-item">SD3-模型训练</a>
+</li>
+            
+<li>
+    <a href="../flux_train/" class="dropdown-item">Flux-模型训练</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li>
+    <a href="../gen_img/" class="dropdown-item">图像生成</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../wd14_tagger/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../train/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/SD-Model-Tools/sd-moadel-doc_zh_cn/edit/master/docs/sd-scripts-docs/fine_tune.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link">概要</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_2" class="nav-link">关于追加功能</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#clip" class="nav-link">更改CLIP的输出</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_3" class="nav-link">以非正方形分辨率进行训练</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#75225" class="nav-link">将标记长度从75扩展到225</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#_4" class="nav-link">训练步骤</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#_5" class="nav-link">数据准备</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#_6" class="nav-link">执行训练</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#fine-tuning" class="nav-link">fine tuning特有的其他主要选项</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#train_text_encoder" class="nav-link">train_text_encoder</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#diffusers_xformers" class="nav-link">diffusers_xformers</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>NovelAI提出的训练方法、自动标注、标签化、Windows + VRAM 12GB（对于SD v1.x）环境等所对应的fine tuning。在这里，fine tuning指的是用图像和标注训练模型（不包括LoRA、Textual Inversion和Hypernetworks）。</p>
+<p>请同时参考<a href="../train/">关于训练的共同文档</a>。</p>
+<h1 id="_1">概要</h1>
+<p>使用Diffusers对Stable Diffusion的U-Net进行fine tuning。对应了NovelAI的文章中的以下改进（虽然Aspect Ratio Bucketing参考了NovelAI的代码，但最终的代码都是原创的）。</p>
+<ul>
+<li>使用CLIP（Text Encoder）的倒数第二层的输出，而不是最后一层的输出。</li>
+<li>以非正方形分辨率进行训练（Aspect Ratio Bucketing）。</li>
+<li>将标记长度从75扩展到225。</li>
+<li>使用BLIP进行标注（自动创建标注）、使用DeepDanbooru或WD14Tagger进行自动标签化。</li>
+<li>支持Hypernetwork的训练。</li>
+<li>支持Stable Diffusion v2.0（base以及768/v）。</li>
+<li>提前获取VAE的输出并保存到磁盘，以减少训练时的内存使用量并提高速度。</li>
+</ul>
+<p>默认情况下，不训练Text Encoder。在整体模型的fine tuning中，通常只训练U-Net（NovelAI似乎也是如此）。可以通过选项指定来训练Text Encoder。</p>
+<h1 id="_2">关于追加功能</h1>
+<h2 id="clip">更改CLIP的输出</h2>
+<p>为了将提示反映到图像中，CLIP（Text Encoder）将文本转换为特征量。Stable Diffusion使用CLIP的最后一层的输出，但可以更改为使用倒数第二层的输出。据NovelAI说，这样可以更准确地反映提示。
+也可以保持原样，使用最后一层的输出。</p>
+<p>*注意：Stable Diffusion 2.0默认使用倒数第二层。请不要指定clip_skip选项。</p>
+<h2 id="_3">以非正方形分辨率进行训练</h2>
+<p>Stable Diffusion是在512<em>512的分辨率下训练的，但除了这个分辨率以外，还会在256</em>1024或384*640等分辨率下进行训练。这样可以减少裁剪的部分，更准确地学习提示和图像之间的关系。
+训练分辨率会在不超过作为参数给出的分辨率的面积（=内存使用量）的范围内，以64像素为单位进行调整。</p>
+<p>在机器学习中，通常将输入大小统一起来，但并不是特别有约束，实际上只要在同一个批次中统一即可。NovelAI所说的bucketing是指预先根据长宽比将训练数据分类到不同的训练分辨率中，然后在每个bucket内创建批次，以统一批次内的图像大小。</p>
+<h2 id="75225">将标记长度从75扩展到225</h2>
+<p>Stable Diffusion的最大标记长度是75（包括开始和结束标记是77），这里将其扩展到225。
+但是，由于CLIP的最大接受长度是75，因此在标记长度为225时，会简单地将其分成三部分，分别调用CLIP，然后将结果连接起来。</p>
+<p>*注意：这种实现方式是否合适尚不明确。目前看来是可以正常工作的。特别是在2.0版本中，没有可以参考的实现方式，因此采用了独自的实现方式。</p>
+<p>*注意：在Automatic1111的Web UI中，似乎会根据逗号进行分割，但这里只是进行了简单的分割。</p>
+<h1 id="_4">训练步骤</h1>
+<p>请预先参考本仓库的README，进行环境设置。</p>
+<h2 id="_5">数据准备</h2>
+<p>请参考<a href="../train/">关于训练数据的准备</a>。fine tuning仅支持使用元数据的fine tuning方式。</p>
+<h2 id="_6">执行训练</h2>
+<p>例如，可以通过以下命令执行训练。以下是一个为了减少内存使用的设置示例。请根据需要修改每一行。</p>
+<pre><code>accelerate launch --num_cpu_threads_per_process 1 fine_tune.py 
+    --pretrained_model_name_or_path=&lt;.ckpt或.safetensors或Diffusers模型目录&gt; 
+    --output_dir=&lt;训练好的模型的输出目录&gt;  
+    --output_name=&lt;训练好的模型输出时的文件名&gt; 
+    --dataset_config=&lt;数据准备时创建的.toml文件&gt; 
+    --save_model_as=safetensors 
+    --learning_rate=5e-6 --max_train_steps=10000 
+    --use_8bit_adam --xformers --gradient_checkpointing
+    --mixed_precision=fp16
+</code></pre>
+<p><code>num_cpu_threads_per_process</code>通常设置为1。</p>
+<p>在<code>pretrained_model_name_or_path</code>中指定用于进行额外训练的原始模型。可以指定Stable Diffusion的checkpoint文件（.ckpt或.safetensors）、Diffusers的本地磁盘上的模型目录、Diffusers的模型ID（例如"stabilityai/stable-diffusion-2"）。</p>
+<p>在<code>output_dir</code>中指定训练后的模型的保存目录。在<code>output_name</code>中指定模型的文件名（不包括扩展名）。通过<code>save_model_as</code>指定以safetensors格式保存模型。</p>
+<p>在<code>dataset_config</code>中指定<code>.toml</code>文件。在文件内，初始的批次大小应设置为<code>1</code>以减少内存消耗。</p>
+<p>将训练步数<code>max_train_steps</code>设置为10000。这里将学习率<code>learning_rate</code>设置为5e-6。</p>
+<p>为了减少内存使用，指定<code>mixed_precision="fp16"</code>（在RTX30系列之后的显卡中，也可以指定<code>bf16</code>。请与在环境设置时对accelerate进行的设置保持一致）。同时指定<code>gradient_checkpointing</code>。</p>
+<p>为了使用内存消耗较少的8bit AdamW作为优化器（用于将模型优化/训练到适应训练数据的类），指定<code>optimizer_type="AdamW8bit"</code>。</p>
+<p>指定<code>xformers</code>选项，使用xformers的CrossAttention。如果没有安装xformers或出现错误（在某些环境下，当<code>mixed_precision="no"</code>时可能会出现这种情况），可以改为指定<code>mem_eff_attn</code>选项，使用节省内存版本的CrossAttention（速度会变慢）。</p>
+<p>如果内存足够，可以编辑<code>.toml</code>文件，将批次大小增加到例如<code>4</code>（可能会提高速度和精度）。</p>
+<h3 id="_7">常见选项</h3>
+<p>在以下情况下，请参考有关选项的文档。</p>
+<ul>
+<li>训练Stable Diffusion 2.x或从中派生的模型</li>
+<li>训练clip skip为2或以上的模型</li>
+<li>使用超过75个标记的标注进行训练</li>
+</ul>
+<h3 id="_8">关于批次大小</h3>
+<p>由于是对整个模型进行训练，与LoRA等相比，内存消耗会更大（与DreamBooth相同）。</p>
+<h3 id="_9">关于学习率</h3>
+<p>通常使用1e-6到5e-6左右的学习率。可以参考其他fine tuning的例子。</p>
+<h3 id="_10">以前的格式的数据集指定的命令行</h3>
+<p>通过选项指定分辨率和批次大小。命令行示例如下。</p>
+<pre><code>accelerate launch --num_cpu_threads_per_process 1 fine_tune.py 
+    --pretrained_model_name_or_path=model.ckpt 
+    --in_json meta_lat.json 
+    --train_data_dir=train_data 
+    --output_dir=fine_tuned 
+    --shuffle_caption 
+    --train_batch_size=1 --learning_rate=5e-6 --max_train_steps=10000 
+    --use_8bit_adam --xformers --gradient_checkpointing
+    --mixed_precision=bf16
+    --save_every_n_epochs=4
+</code></pre>
+<!-- 
+### 使用fp16梯度的训练（实验性功能）
+如果指定full_fp16选项，则会将梯度从通常的float32改为float16（fp16）进行训练（似乎不是混合精度，而是完全的fp16训练）。这样，在SD1.x的512*512尺寸下，VRAM使用量可以小于8GB，在SD2.x的512*512尺寸下，可以小于12GB。
+
+请预先通过accelerate config指定fp16，并通过选项指定mixed_precision="fp16"（不能使用bf16）。
+
+为了最小化内存使用量，请指定xformers、use_8bit_adam和gradient_checkpointing选项，并将train_batch_size设置为1。
+（如果有余裕，可以逐步增加train_batch_size，应该可以稍微提高精度。）
+
+这是通过对PyTorch的源代码打补丁强行实现的（在PyTorch 1.12.1和1.13.0中确认）。精度会明显下降，训练失败的概率也会增加。学习率和步数设置似乎也很敏感。请在了解这些风险的基础上，自行承担风险使用。
+-->
+
+<h1 id="fine-tuning">fine tuning特有的其他主要选项</h1>
+<p>关于所有选项，请参考其他文档。</p>
+<h2 id="train_text_encoder"><code>train_text_encoder</code></h2>
+<p>将Text Encoder也作为训练对象。内存使用量会略微增加。</p>
+<p>在通常的fine tuning中，不将Text Encoder作为训练对象（可能是因为U-Net是根据Text Encoder的输出进行训练的），但在训练数据较少的情况下，像DreamBooth一样对Text Encoder进行训练似乎也是有效的。</p>
+<h2 id="diffusers_xformers"><code>diffusers_xformers</code></h2>
+<p>使用Diffusers的xformers功能，而不是脚本自有的xformers替换功能。这样就无法进行Hypernetwork的训练。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

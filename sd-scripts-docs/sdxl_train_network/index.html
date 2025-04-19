@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>SDXL-Lora-模型训练 - Models Train Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Models Train Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">SD-Scripts-Docs</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">数据准备</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../config/" class="dropdown-item">数据集配置</a>
+</li>
+            
+<li>
+    <a href="../masked_loss/" class="dropdown-item">蒙版数据</a>
+</li>
+            
+<li>
+    <a href="../wd14_tagger/" class="dropdown-item">打标</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">模型训练</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../fine_tune/" class="dropdown-item">微调训练</a>
+</li>
+            
+<li>
+    <a href="../train/" class="dropdown-item">模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_network/" class="dropdown-item">Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_db/" class="dropdown-item">DreamBooth-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_ti/" class="dropdown-item">Textual-Inversion-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_lllite/" class="dropdown-item">ControlNet-LLLite-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_SDXL/" class="dropdown-item">SDXL-模型训练</a>
+</li>
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">SDXL-Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sd3_train_network/" class="dropdown-item">SD3-模型训练</a>
+</li>
+            
+<li>
+    <a href="../flux_train/" class="dropdown-item">Flux-模型训练</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li>
+    <a href="../gen_img/" class="dropdown-item">图像生成</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../train_SDXL/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../sd3_train_network/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/SD-Model-Tools/sd-moadel-doc_zh_cn/edit/master/docs/sd-scripts-docs/sdxl_train_network.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#sdxl-lora-sdxl_train_networkpy" class="nav-link">SDXL LoRA 学习脚本 sdxl_train_network.py 的使用方法</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#1" class="nav-link">1. 简介</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2" class="nav-link">2. 准备工作</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3" class="nav-link">3. 开始训练</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4" class="nav-link">4. 使用训练好的模型</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#5-train_networkpy" class="nav-link">5. 补充：与 train_network.py 的主要区别</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="sdxl-lora-sdxl_train_networkpy">SDXL LoRA 学习脚本 <code>sdxl_train_network.py</code> 的使用方法</h1>
+<p>本文档介绍如何使用 <code>sd-scripts</code> 仓库中的 <code>sdxl_train_network.py</code> 脚本来训练 SDXL (Stable Diffusion XL) 模型的 LoRA (Low-Rank Adaptation) 模型。</p>
+<h2 id="1">1. 简介</h2>
+<p><code>sdxl_train_network.py</code> 是一个用于训练 SDXL 模型附加网络（如 LoRA）的脚本。其基本用法与 <code>train_network.py</code> 相同，但需要针对 SDXL 模型进行特定设置。</p>
+<p>本指南重点介绍 SDXL LoRA 训练，并说明与 <code>train_network.py</code> 的主要区别以及 SDXL 特有的设置项。</p>
+<p><strong>前提条件：</strong></p>
+<ul>
+<li>已克隆 <code>sd-scripts</code> 仓库并设置好 Python 环境。</li>
+<li>准备好用于训练的数据集。（有关数据集准备，请参阅<a href="../config/">数据集准备指南</a>。）</li>
+<li>已阅读 <a href="../train_network/">LoRA 训练脚本 <code>train_network.py</code> 的使用方法</a>。</li>
+</ul>
+<h2 id="2">2. 准备工作</h2>
+<p>开始训练前，需要以下文件：</p>
+<ol>
+<li><strong>训练脚本：</strong> <code>sdxl_train_network.py</code></li>
+<li><strong>数据集定义文件 (.toml)：</strong> 一个 TOML 格式的文件，用于描述训练数据集的配置。</li>
+</ol>
+<h3 id="_1">关于数据集定义文件</h3>
+<p>数据集定义文件 (<code>.toml</code>) 的基本写法与 <code>train_network.py</code> 相同。请参阅<a href="../config/">数据集配置指南</a> 和 <a href="../train_network/">LoRA 训练脚本 <code>train_network.py</code> 的使用方法</a>。</p>
+<p>SDXL 通常使用高分辨率数据集和宽高比桶 (<code>enable_bucket = true</code>)。</p>
+<p>下面以 <code>my_sdxl_dataset_config.toml</code> 为例进行说明。</p>
+<h2 id="3">3. 开始训练</h2>
+<p>通过在终端运行 <code>sdxl_train_network.py</code> 来开始训练。</p>
+<p>以下是一个基本的 SDXL LoRA 训练命令行示例：</p>
+<pre><code class="language-bash">accelerate launch --num_cpu_threads_per_process 1 sdxl_train_network.py 
+ --pretrained_model_name_or_path=&quot;&lt;SDXL基础模型的路径&gt;&quot; 
+ --dataset_config=&quot;my_sdxl_dataset_config.toml&quot; 
+ --output_dir=&quot;&lt;训练结果输出目录&gt;&quot; 
+ --output_name=&quot;my_sdxl_lora&quot; 
+ --save_model_as=safetensors 
+ --network_module=networks.lora 
+ --network_dim=32 
+ --network_alpha=16 
+ --learning_rate=1e-4 
+ --unet_lr=1e-4 
+ --text_encoder_lr1=1e-5 
+ --text_encoder_lr2=1e-5 
+ --optimizer_type=&quot;AdamW8bit&quot; 
+ --lr_scheduler=&quot;constant&quot; 
+ --max_train_epochs=10 
+ --save_every_n_epochs=1 
+ --mixed_precision=&quot;bf16&quot; 
+ --gradient_checkpointing 
+ --cache_text_encoder_outputs 
+ --cache_latents
+</code></pre>
+<p>与 <code>train_network.py</code> 的运行示例相比，主要区别如下：</p>
+<ul>
+<li>运行的脚本是 <code>sdxl_train_network.py</code>。</li>
+<li><code>--pretrained_model_name_or_path</code> 需要指定 SDXL 的基础模型。</li>
+<li><code>--text_encoder_lr</code> 被拆分为 <code>--text_encoder_lr1</code> 和 <code>--text_encoder_lr2</code>（因为 SDXL 有两个 Text Encoder）。</li>
+<li>推荐使用 <code>bf16</code> 或 <code>fp16</code> 作为 <code>--mixed_precision</code>。</li>
+<li>推荐使用 <code>--cache_text_encoder_outputs</code> 和 <code>--cache_latents</code> 以减少 VRAM 使用量。</li>
+</ul>
+<p>接下来，介绍与 <code>train_network.py</code> 不同的主要命令行参数。</p>
+<h3 id="31">3.1. 主要命令行参数（差异部分）</h3>
+<h4 id="_2">模型相关</h4>
+<ul>
+<li><code>--pretrained_model_name_or_path="&lt;模型路径&gt;"</code> <strong>[必需]</strong><ul>
+<li>指定用于训练的 <strong>SDXL 模型</strong>。可以是 Hugging Face Hub 的模型 ID（例如 <code>"stabilityai/stable-diffusion-xl-base-1.0"</code>），也可以是本地的 Diffusers 格式模型目录或 <code>.safetensors</code> 文件路径。</li>
+</ul>
+</li>
+<li><code>--v2</code>, <code>--v_parameterization</code><ul>
+<li>这些参数适用于 SD1.x/2.x 模型。使用 <code>sdxl_train_network.py</code> 时，由于是针对 SDXL 模型，因此<strong>通常不需要指定这些参数</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="_3">数据集相关</h4>
+<ul>
+<li><code>--dataset_config="&lt;配置文件路径&gt;"</code><ul>
+<li>与 <code>train_network.py</code> 相同。</li>
+<li>SDXL 中通常会使用高分辨率数据或桶功能（在 <code>.toml</code> 中设置 <code>enable_bucket = true</code>）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="_4">输出和保存相关</h4>
+<ul>
+<li>与 <code>train_network.py</code> 相同。</li>
+</ul>
+<h4 id="lora">LoRA 参数</h4>
+<ul>
+<li>与 <code>train_network.py</code> 相同。</li>
+</ul>
+<h4 id="_5">训练参数</h4>
+<ul>
+<li><code>--learning_rate=1e-4</code><ul>
+<li>全局学习率。若未指定 <code>unet_lr</code>、<code>text_encoder_lr1</code> 和 <code>text_encoder_lr2</code>，则使用该值。</li>
+</ul>
+</li>
+<li><code>--unet_lr=1e-4</code><ul>
+<li>U-Net 部分 LoRA 模块的学习率。若未指定，则使用 <code>--learning_rate</code> 的值。</li>
+</ul>
+</li>
+<li><code>--text_encoder_lr1=1e-5</code><ul>
+<li><strong>Text Encoder 1 (OpenCLIP ViT-G/14) 的 LoRA 模块</strong>的学习率。通常建议比 U-Net 的学习率小。</li>
+</ul>
+</li>
+<li><code>--text_encoder_lr2=1e-5</code><ul>
+<li><strong>Text Encoder 2 (CLIP ViT-L/14) 的 LoRA 模块</strong>的学习率。通常建议比 U-Net 的学习率小。</li>
+</ul>
+</li>
+<li><code>--optimizer_type="AdamW8bit"</code><ul>
+<li>与 <code>train_network.py</code> 相同。</li>
+</ul>
+</li>
+<li><code>--lr_scheduler="constant"</code><ul>
+<li>与 <code>train_network.py</code> 相同。</li>
+</ul>
+</li>
+<li><code>--lr_warmup_steps</code><ul>
+<li>与 <code>train_network.py</code> 相同。</li>
+</ul>
+</li>
+<li><code>--max_train_steps</code>, <code>--max_train_epochs</code><ul>
+<li>与 <code>train_network.py</code> 相同。</li>
+</ul>
+</li>
+<li><code>--mixed_precision="bf16"</code><ul>
+<li>混合精度训练的设置。SDXL 中推荐使用 <code>bf16</code> 或 <code>fp16</code>。请根据 GPU 的支持情况选择，以减少 VRAM 使用并提升训练速度。</li>
+</ul>
+</li>
+<li><code>--gradient_accumulation_steps=1</code><ul>
+<li>与 <code>train_network.py</code> 相同。</li>
+</ul>
+</li>
+<li><code>--gradient_checkpointing</code><ul>
+<li>与 <code>train_network.py</code> 相同。由于 SDXL 内存消耗较大，推荐启用此选项。</li>
+</ul>
+</li>
+<li><code>--cache_latents</code><ul>
+<li>将 VAE 的输出缓存到内存（或指定 <code>--cache_latents_to_disk</code> 时缓存到磁盘）。可以跳过 VAE 计算，从而减少 VRAM 使用并加速训练。但会禁用图像增强（如 <code>--color_aug</code>、<code>--flip_aug</code>、<code>--random_crop</code> 等）。SDXL 训练推荐使用此选项。</li>
+</ul>
+</li>
+<li><code>--cache_latents_to_disk</code><ul>
+<li>与 <code>--cache_latents</code> 配合使用，将缓存存储到磁盘。在首次加载数据集时，会将 VAE 输出缓存到磁盘。在后续训练中可以跳过 VAE 计算，适合数据量较大的情况。</li>
+</ul>
+</li>
+<li><code>--cache_text_encoder_outputs</code><ul>
+<li>将 Text Encoder 的输出缓存到内存（或指定 <code>--cache_text_encoder_outputs_to_disk</code> 时缓存到磁盘）。可以减少 VRAM 使用并加速训练。但会禁用文本增强（如 <code>--shuffle_caption</code>、<code>--caption_dropout_rate</code> 等）。</li>
+<li><strong>注意：</strong> 使用此选项时，Text Encoder 的 LoRA 模块将无法训练（必须指定 <code>--network_train_unet_only</code>）。</li>
+</ul>
+</li>
+<li><code>--cache_text_encoder_outputs_to_disk</code><ul>
+<li>与 <code>--cache_text_encoder_outputs</code> 配合使用，将缓存存储到磁盘。</li>
+</ul>
+</li>
+<li><code>--no_half_vae</code><ul>
+<li>即使在使用混合精度 (<code>fp16</code>/<code>bf16</code>) 时，也让 VAE 以 <code>float32</code> 运行。SDXL 的 VAE 在 <code>float16</code> 下可能不稳定，因此在指定 <code>fp16</code> 时建议启用此选项。</li>
+</ul>
+</li>
+<li><code>--clip_skip</code><ul>
+<li>SDXL 通常不需要使用，推荐不指定。</li>
+</ul>
+</li>
+<li><code>--fused_backward_pass</code><ul>
+<li>将梯度计算和优化器步骤合并，以减少 VRAM 使用量。适用于 SDXL（目前仅支持 <code>Adafactor</code> 优化器）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="_6">其他</h4>
+<ul>
+<li><code>--seed</code>、<code>--logging_dir</code>、<code>--log_prefix</code> 等参数与 <code>train_network.py</code> 相同。</li>
+</ul>
+<h3 id="32">3.2. 开始训练</h3>
+<p>配置好必要参数后，运行命令即可开始训练。训练进度会输出到控制台。基本流程与 <code>train_network.py</code> 相同。</p>
+<h2 id="4">4. 使用训练好的模型</h2>
+<p>训练完成后，在 <code>--output_dir</code> 指定的目录下会保存以 <code>--output_name</code> 命名的 LoRA 模型文件（例如 <code>.safetensors</code>）。</p>
+<p>该文件可用于支持 SDXL 的 GUI 工具，如 AUTOMATIC1111/stable-diffusion-webui 和 ComfyUI。</p>
+<h2 id="5-train_networkpy">5. 补充：与 <code>train_network.py</code> 的主要区别</h2>
+<ul>
+<li><strong>目标模型：</strong> <code>sdxl_train_network.py</code> 专门用于 SDXL 模型。</li>
+<li><strong>Text Encoder：</strong> SDXL 有两个 Text Encoder，因此学习率的指定（<code>--text_encoder_lr1</code>、<code>--text_encoder_lr2</code>）有所不同。</li>
+<li><strong>缓存功能：</strong> <code>--cache_text_encoder_outputs</code> 在 SDXL 中效果显著，推荐使用。</li>
+<li><strong>推荐设置：</strong> 由于 SDXL 内存占用较大，推荐使用 <code>bf16</code> 或 <code>fp16</code> 混合精度、<code>gradient_checkpointing</code>，以及缓存功能（<code>--cache_latents</code>、<code>--cache_text_encoder_outputs</code>）。若使用 <code>fp16</code>，建议搭配 <code>--no_half_vae</code> 让 VAE 以 <code>float32</code> 运行。</li>
+</ul>
+<p>更多详细选项，请参考脚本的帮助信息 (<code>python sdxl_train_network.py --help</code>) 或仓库中的其他文档。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

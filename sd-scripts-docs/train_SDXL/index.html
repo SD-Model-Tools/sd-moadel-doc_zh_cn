@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>SDXL-模型训练 - Models Train Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Models Train Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">SD-Scripts-Docs</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">数据准备</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../config/" class="dropdown-item">数据集配置</a>
+</li>
+            
+<li>
+    <a href="../masked_loss/" class="dropdown-item">蒙版数据</a>
+</li>
+            
+<li>
+    <a href="../wd14_tagger/" class="dropdown-item">打标</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">模型训练</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../fine_tune/" class="dropdown-item">微调训练</a>
+</li>
+            
+<li>
+    <a href="../train/" class="dropdown-item">模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_network/" class="dropdown-item">Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_db/" class="dropdown-item">DreamBooth-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_ti/" class="dropdown-item">Textual-Inversion-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_lllite/" class="dropdown-item">ControlNet-LLLite-模型训练</a>
+</li>
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">SDXL-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sdxl_train_network/" class="dropdown-item">SDXL-Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sd3_train_network/" class="dropdown-item">SD3-模型训练</a>
+</li>
+            
+<li>
+    <a href="../flux_train/" class="dropdown-item">Flux-模型训练</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li>
+    <a href="../gen_img/" class="dropdown-item">图像生成</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../train_lllite/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../sdxl_train_network/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/SD-Model-Tools/sd-moadel-doc_zh_cn/edit/master/docs/sd-scripts-docs/train_SDXL.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#sdxl" class="nav-link">SDXL 训练</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h2 id="sdxl">SDXL 训练</h2>
+<p>未来，该文档将被移动到训练文档中。以下是关于 SDXL 训练脚本的简要说明。</p>
+<h3 id="sdxl_1">SDXL 训练脚本</h3>
+<ul>
+<li><code>sdxl_train.py</code> 是一个用于 SDXL 微调的脚本，其用法与 <code>fine_tune.py</code> 几乎相同，但也支持 DreamBooth 数据集。</li>
+<li>新增了 <code>--full_bf16</code> 选项。感谢 KohakuBlueleaf！<ul>
+<li>该选项启用全 bfloat16 训练（包括梯度）。此选项有助于减少 GPU 内存使用。</li>
+<li>全 bfloat16 训练可能不稳定，请谨慎使用。</li>
+</ul>
+</li>
+<li>现在，<code>sdxl_train.py</code> 支持为每个 U-Net 块设置不同的学习率。使用 <code>--block_lr</code> 选项指定，格式为用逗号分隔的 23 个值，如 <code>--block_lr 1e-3,1e-3 ... 1e-3</code>。<ul>
+<li>这 23 个值分别对应 <code>0: time/label embed, 1-9: input blocks 0-8, 10-12: mid blocks 0-2, 13-21: output blocks 0-8, 22: out</code>。</li>
+</ul>
+</li>
+<li>
+<p><code>prepare_buckets_latents.py</code> 现在支持 SDXL 微调。</p>
+</li>
+<li>
+<p><code>sdxl_train_network.py</code> 是一个用于 SDXL LoRA 训练的脚本，其用法与 <code>train_network.py</code> 几乎相同。</p>
+</li>
+<li>
+<p>两个脚本都有以下附加选项：</p>
+</li>
+<li><code>--cache_text_encoder_outputs</code> 和 <code>--cache_text_encoder_outputs_to_disk</code>：缓存文本编码器的输出。此选项有助于减少 GPU 内存使用。但不能与随机打乱或丢弃标题的选项一起使用。</li>
+<li>
+<p><code>--no_half_vae</code>：禁用半精度（混合精度）VAE。SDXL 的 VAE 在某些情况下似乎会产生 NaN。此选项有助于避免 NaN。</p>
+</li>
+<li>
+<p><code>--weighted_captions</code> 选项尚不支持这两个脚本。</p>
+</li>
+<li>
+<p><code>sdxl_train_textual_inversion.py</code> 是一个用于 SDXL Textual Inversion 训练的脚本，其用法与 <code>train_textual_inversion.py</code> 几乎相同。</p>
+</li>
+<li>不支持 <code>--cache_text_encoder_outputs</code>。</li>
+<li>有两种标题选项：<ol>
+<li>使用标题进行训练。所有标题必须包含标记字符串。标记字符串将被替换为多个标记。</li>
+<li>使用 <code>--use_object_template</code> 或 <code>--use_style_template</code> 选项。标题将从模板生成。现有的标题将被忽略。</li>
+</ol>
+</li>
+<li>
+<p>下面是嵌入的格式。</p>
+</li>
+<li>
+<p><code>--min_timestep</code> 和 <code>--max_timestep</code> 选项已添加到每个训练脚本中。这些选项可用于使用不同的时间步训练 U-Net。默认值为 0 和 1000。</p>
+</li>
+</ul>
+<h3 id="sdxl_2">SDXL 实用脚本</h3>
+<ul>
+<li>新增了 <code>tools/cache_latents.py</code>。该脚本可用于提前将潜变量缓存到磁盘。</li>
+<li>选项与 <code>sdxl_train.py</code> 几乎相同。有关用法，请参见帮助消息。</li>
+<li>请按以下方式启动脚本：
+    <code>accelerate launch  --num_cpu_threads_per_process 1 tools/cache_latents.py ...</code></li>
+<li>
+<p>该脚本应该可以在多 GPU 上工作，但尚未在我的环境中进行测试。</p>
+</li>
+<li>
+<p>新增了 <code>tools/cache_text_encoder_outputs.py</code>。该脚本可用于提前将文本编码器输出缓存到磁盘。</p>
+</li>
+<li>
+<p>选项与 <code>cache_latents.py</code> 和 <code>sdxl_train.py</code> 几乎相同。有关用法，请参见帮助消息。</p>
+</li>
+<li>
+<p>新增了 <code>sdxl_gen_img.py</code>。该脚本可用于使用 SDXL（包括 LoRA、Textual Inversion 和 ControlNet-LLLite）生成图像。有关用法，请参见帮助消息。</p>
+</li>
+</ul>
+<h3 id="sdxl_3">SDXL 训练技巧</h3>
+<ul>
+<li>SDXL 的默认分辨率为 1024x1024。</li>
+<li>微调可以在 24GB GPU 内存下以批量大小为 1 进行。对于 24GB GPU，建议使用以下选项__进行 24GB GPU 内存下的微调__：</li>
+<li>仅训练 U-Net。</li>
+<li>使用梯度检查点。</li>
+<li>使用 <code>--cache_text_encoder_outputs</code> 选项和缓存潜变量。</li>
+<li>使用 Adafactor 优化器。RMSprop 8bit 或 Adagrad 8bit 可能有效。AdamW 8bit 似乎无效。</li>
+<li>LoRA 训练可以在 8GB GPU 内存下进行（推荐 10GB）。为了减少 GPU 内存使用，建议使用以下选项：</li>
+<li>仅训练 U-Net。</li>
+<li>使用梯度检查点。</li>
+<li>使用 <code>--cache_text_encoder_outputs</code> 选项和缓存潜变量。</li>
+<li>使用 8 位优化器或 Adafactor 优化器之一。</li>
+<li>使用较低的维度（对于 8GB GPU 为 4 到 8）。</li>
+<li>强烈建议为 SDXL LoRA 使用 <code>--network_train_unet_only</code> 选项。因为 SDXL 有两个文本编码器，训练结果可能不符合预期。</li>
+<li>PyTorch 2 似乎比 PyTorch 1 使用的 GPU 内存略少。</li>
+<li><code>--bucket_reso_steps</code> 可以设置为 32，而不是默认值 64。小于 32 的值不适用于 SDXL 训练。</li>
+</ul>
+<p>Adafactor 优化器的示例配置（固定学习率）：</p>
+<pre><code class="language-toml">optimizer_type = &quot;adafactor&quot;
+optimizer_args = [ &quot;scale_parameter=False&quot;, &quot;relative_step=False&quot;, &quot;warmup_init=False&quot; ]
+lr_scheduler = &quot;constant_with_warmup&quot;
+lr_warmup_steps = 100
+learning_rate = 4e-7 # SDXL 原始学习率
+</code></pre>
+<h3 id="sdxl-textual-inversion">SDXL Textual Inversion 嵌入格式</h3>
+<pre><code class="language-python">from safetensors.torch import save_file
+
+state_dict = {&quot;clip_g&quot;: embs_for_text_encoder_1280, &quot;clip_l&quot;: embs_for_text_encoder_768}
+save_file(state_dict, file)
+</code></pre>
+<h3 id="controlnet-lllite">ControlNet-LLLite</h3>
+<p>新增了 ControlNet-LLLite，一种用于 SDXL 的新型 ControlNet 方法。详细信息请参见 <a href="../train_lllite/">文档</a>。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

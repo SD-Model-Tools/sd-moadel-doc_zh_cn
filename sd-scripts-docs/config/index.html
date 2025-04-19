@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>数据集配置 - Models Train Docs</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Models Train Docs</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">SD-Scripts-Docs</a>
+                                <ul class="dropdown-menu">
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">数据准备</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="./" class="dropdown-item active" aria-current="page">数据集配置</a>
+</li>
+            
+<li>
+    <a href="../masked_loss/" class="dropdown-item">蒙版数据</a>
+</li>
+            
+<li>
+    <a href="../wd14_tagger/" class="dropdown-item">打标</a>
+</li>
+    </ul>
+  </li>
+                                    
+  <li class="dropdown-submenu">
+    <a href="#" class="dropdown-item">模型训练</a>
+    <ul class="dropdown-menu">
+            
+<li>
+    <a href="../fine_tune/" class="dropdown-item">微调训练</a>
+</li>
+            
+<li>
+    <a href="../train/" class="dropdown-item">模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_network/" class="dropdown-item">Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_db/" class="dropdown-item">DreamBooth-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_ti/" class="dropdown-item">Textual-Inversion-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_lllite/" class="dropdown-item">ControlNet-LLLite-模型训练</a>
+</li>
+            
+<li>
+    <a href="../train_SDXL/" class="dropdown-item">SDXL-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sdxl_train_network/" class="dropdown-item">SDXL-Lora-模型训练</a>
+</li>
+            
+<li>
+    <a href="../sd3_train_network/" class="dropdown-item">SD3-模型训练</a>
+</li>
+            
+<li>
+    <a href="../flux_train/" class="dropdown-item">Flux-模型训练</a>
+</li>
+    </ul>
+  </li>
+                                    
+<li>
+    <a href="../gen_img/" class="dropdown-item">图像生成</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../.." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../masked_loss/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/SD-Model-Tools/sd-moadel-doc_zh_cn/edit/master/docs/sd-scripts-docs/config.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_1" class="nav-link">概要</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_2" class="nav-link">数据集和子集的设置</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_9" class="nav-link">子集重复时的行为</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_10" class="nav-link">与命令行参数的结合使用</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_11" class="nav-link">错误指南</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="2"><a href="#_12" class="nav-link">其他</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<p>本文档介绍了可以通过 <code>--dataset_config</code> 传递的配置文件。</p>
+<h2 id="_1">概要</h2>
+<p>通过传递配置文件，用户可以进行更细致的设置。</p>
+<ul>
+<li>可以配置多个数据集<ul>
+<li>例如，可以为每个数据集设置不同的 <code>resolution</code>，并混合使用它们进行训练。</li>
+<li>对于支持DreamBooth和fine-tuning两种训练方法的方法，可以混合使用这两种方式的数据集。</li>
+</ul>
+</li>
+<li>可以为每个子集设置不同的选项<ul>
+<li>子集是指将数据集按图像目录或元数据分割后的部分。多个子集组成一个数据集。</li>
+<li>像 <code>keep_tokens</code> 和 <code>flip_aug</code> 这样的选项可以为每个子集单独设置。而像 <code>resolution</code> 和 <code>batch_size</code> 这样的选项则是针对整个数据集的，对于属于同一数据集的子集，这些选项的值是相同的。具体细节将在后文中说明。</li>
+</ul>
+</li>
+</ul>
+<p>配置文件可以使用JSON或TOML格式。考虑到易读性，推荐使用<a href="https://toml.io/en/v1.0.0-rc.2">TOML</a>。以下说明将基于TOML格式。</p>
+<p>下面是一个TOML配置文件的例子：</p>
+<pre><code class="language-toml">[general]
+shuffle_caption = true
+caption_extension = '.txt'
+keep_tokens = 1
+
+# 这是一个DreamBooth方式的数据集
+[[datasets]]
+resolution = 512
+batch_size = 4
+keep_tokens = 2
+
+  [[datasets.subsets]]
+  image_dir = 'C:\hoge'
+  class_tokens = 'hoge girl'
+  # 这个子集的keep_tokens = 2（使用所属datasets的值）
+
+  [[datasets.subsets]]
+  image_dir = 'C:\fuga'
+  class_tokens = 'fuga boy'
+  keep_tokens = 3
+
+  [[datasets.subsets]]
+  is_reg = true
+  image_dir = 'C:\reg'
+  class_tokens = 'human'
+  keep_tokens = 1
+
+# 这是一个fine-tuning方式的数据集
+[[datasets]]
+resolution = [768, 768]
+batch_size = 2
+
+  [[datasets.subsets]]
+  image_dir = 'C:\piyo'
+  metadata_file = 'C:\piyo\piyo_md.json'
+  # 这个子集的keep_tokens = 1（使用general的值）
+</code></pre>
+<p>在这个例子中，三个目录将以512x512（batch size 4）的分辨率使用DreamBooth方式进行训练，而一个目录将以768x768（batch size 2）的分辨率使用fine-tuning方式进行训练。</p>
+<h2 id="_2">数据集和子集的设置</h2>
+<p>数据集和子集的设置可以在多个地方进行配置。</p>
+<ul>
+<li><code>[general]</code><ul>
+<li>这里指定适用于所有数据集或所有子集的选项。</li>
+<li>如果在数据集或子集的设置中存在同名的选项，则数据集或子集的设置将优先。</li>
+</ul>
+</li>
+<li><code>[[datasets]]</code><ul>
+<li><code>datasets</code> 是用于注册数据集设置的部分。这里指定适用于各个数据集的选项。</li>
+<li>如果子集中存在同名的选项，则子集的设置将优先。</li>
+</ul>
+</li>
+<li><code>[[datasets.subsets]]</code><ul>
+<li><code>datasets.subsets</code> 是用于注册子集设置的部分。这里指定适用于各个子集的选项。</li>
+</ul>
+</li>
+</ul>
+<p>下面是一个关于图像目录和注册位置对应关系的示意图，基于前面的例子：</p>
+<pre><code>C:\
+├─ hoge  -&gt;  [[datasets.subsets]] No.1  ┐                        ┐
+├─ fuga  -&gt;  [[datasets.subsets]] No.2  |-&gt;  [[datasets]] No.1   |-&gt;  [general]
+├─ reg   -&gt;  [[datasets.subsets]] No.3  ┘                        |
+└─ piyo  -&gt;  [[datasets.subsets]] No.4  --&gt;  [[datasets]] No.2   ┘
+</code></pre>
+<p>每个图像目录对应一个 <code>[[datasets.subsets]]</code>。多个 <code>[[datasets.subsets]]</code> 组合成一个 <code>[[datasets]]</code>。所有 <code>[[datasets]]</code> 和 <code>[[datasets.subsets]]</code> 都属于 <code>[general]</code>。</p>
+<p>不同注册位置可以指定的选项不同。如果存在同名的选项，则较低级别的注册位置的值将优先。查看前面的例子中 <code>keep_tokens</code> 选项的处理方式可以帮助理解这一点。</p>
+<p>此外，可用的选项还会根据训练方法支持的选项而有所不同。</p>
+<ul>
+<li>仅适用于DreamBooth方式的选项</li>
+<li>仅适用于fine-tuning方式的选项</li>
+<li>如果支持caption dropout，则可用的选项</li>
+</ul>
+<p>对于同时支持DreamBooth和fine-tuning的训练方法，可以混合使用这两种方式。但是，需要注意的是，在同一个数据集中，不能混合使用DreamBooth和fine-tuning方式的子集。也就是说，如果要混合使用这两种方式，需要将它们设置为不同的数据集。</p>
+<p>程序的行为是，如果存在 <code>metadata_file</code> 选项，则判断为fine-tuning方式的子集。因此，对于属于同一数据集的子集，要么全部具有 <code>metadata_file</code> 选项，要么全部不具有该选项。</p>
+<p>下面介绍可用的选项。对于与命令行参数名称相同的选项，通常不再重复说明。请参考其他README文件。</p>
+<h3 id="_3">所有训练方法共通的选项</h3>
+<p>这些选项与训练方法无关。</p>
+<h4 id="_4">数据集选项</h4>
+<p>这些选项与数据集的设置相关，不能在 <code>datasets.subsets</code> 中指定。</p>
+<table>
+<thead>
+<tr>
+<th>选项名</th>
+<th>设置示例</th>
+<th><code>[general]</code></th>
+<th><code>[[datasets]]</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>batch_size</code></td>
+<td><code>1</code></td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>bucket_no_upscale</code></td>
+<td><code>true</code></td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>bucket_reso_steps</code></td>
+<td><code>64</code></td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>enable_bucket</code></td>
+<td><code>true</code></td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>max_bucket_reso</code></td>
+<td><code>1024</code></td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>min_bucket_reso</code></td>
+<td><code>128</code></td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>resolution</code></td>
+<td><code>256</code>, <code>[512, 512]</code></td>
+<td>o</td>
+<td>o</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>batch_size</code><ul>
+<li>与命令行参数 <code>--train_batch_size</code> 等效。</li>
+</ul>
+</li>
+<li><code>max_bucket_reso</code>, <code>min_bucket_reso</code><ul>
+<li>指定bucket的最大和最小分辨率。必须能被 <code>bucket_reso_steps</code> 整除。</li>
+</ul>
+</li>
+</ul>
+<p>这些设置对于数据集是固定的。因此，属于同一数据集的子集将共享这些设置。例如，如果要使用不同分辨率的数据集，可以像上面的例子一样，将它们定义为不同的数据集。</p>
+<h4 id="_5">子集选项</h4>
+<p>这些选项与子集的设置相关。</p>
+<table>
+<thead>
+<tr>
+<th>选项名</th>
+<th>设置示例</th>
+<th><code>[general]</code></th>
+<th><code>[[datasets]]</code></th>
+<th><code>[[dataset.subsets]]</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>color_aug</code></td>
+<td><code>false</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>face_crop_aug_range</code></td>
+<td><code>[1.0, 3.0]</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>flip_aug</code></td>
+<td><code>true</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>keep_tokens</code></td>
+<td><code>2</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>num_repeats</code></td>
+<td><code>10</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>random_crop</code></td>
+<td><code>false</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>shuffle_caption</code></td>
+<td><code>true</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>caption_prefix</code></td>
+<td><code>“masterpiece, best quality, ”</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>caption_suffix</code></td>
+<td><code>“, from side”</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>caption_separator</code></td>
+<td>（通常不设置）</td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>keep_tokens_separator</code></td>
+<td><code>“|||”</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>secondary_separator</code></td>
+<td><code>“;;;”</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>enable_wildcard</code></td>
+<td><code>true</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>resize_interpolation</code></td>
+<td>（通常不设置）</td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>num_repeats</code><ul>
+<li>指定子集中图像的重复次数。相当于fine-tuning中的 <code>--dataset_repeats</code>，但 <code>num_repeats</code> 可用于任何训练方法。</li>
+</ul>
+</li>
+<li>
+<p><code>caption_prefix</code>, <code>caption_suffix</code></p>
+<ul>
+<li>指定在标题前后添加的字符串。shuffle操作将在添加这些字符串后进行。如果设置了 <code>keep_tokens</code>，请注意这一点。</li>
+</ul>
+</li>
+<li>
+<p><code>caption_separator</code></p>
+<ul>
+<li>指定用于分隔标签的字符串。默认为 <code>,</code>。通常不需要设置此选项。</li>
+</ul>
+</li>
+<li>
+<p><code>keep_tokens_separator</code></p>
+<ul>
+<li>指定用于分隔标题中要保留部分的字符。例如，<code>aaa, bbb ||| ccc, ddd, eee, fff ||| ggg, hhh</code> 将保留 <code>aaa, bbb</code> 和 <code>ggg, hhh</code> 部分，不会被shuffle或drop。中间的逗号是可选的。结果可能是 <code>aaa, bbb, eee, ccc, fff, ggg, hhh</code> 或 <code>aaa, bbb, fff, ccc, eee, ggg, hhh</code> 等。</li>
+</ul>
+</li>
+<li>
+<p><code>secondary_separator</code></p>
+<ul>
+<li>指定额外的分隔符。由此分隔的部分将被视为一个标签，进行shuffle和drop，然后替换为 <code>caption_separator</code>。例如，<code>aaa;;;bbb;;;ccc</code> 将被替换为 <code>aaa,bbb,ccc</code>，或者一起被drop。</li>
+</ul>
+</li>
+<li>
+<p><code>enable_wildcard</code></p>
+<ul>
+<li>启用通配符表示法和多行标题。通配符表示法和多行标题将在后面说明。</li>
+</ul>
+</li>
+<li>
+<p><code>resize_interpolation</code></p>
+<ul>
+<li>指定图像缩放时使用的插值方法。通常不需要设置。如果指定了，则将使用相同的插值方法进行放大和缩小。可以指定的值有 <code>lanczos</code>, <code>nearest</code>, <code>bilinear</code>, <code>linear</code>, <code>bicubic</code>, <code>cubic</code>, <code>area</code>, <code>box</code>。默认（未指定时）为缩小时使用 <code>area</code>，放大时使用 <code>lanczos</code>。如果指定了此选项，则将使用相同的插值方法进行放大和缩小。指定 <code>lanczos</code> 或 <code>box</code> 时将使用PIL，其他值将使用OpenCV。</li>
+</ul>
+</li>
+</ul>
+<h3 id="dreambooth">仅适用于DreamBooth方式的选项</h3>
+<p>DreamBooth方式的选项仅存在于子集选项中。</p>
+<h4 id="_6">子集选项</h4>
+<p>这些选项与DreamBooth方式的子集设置相关。</p>
+<table>
+<thead>
+<tr>
+<th>选项名</th>
+<th>设置示例</th>
+<th><code>[general]</code></th>
+<th><code>[[datasets]]</code></th>
+<th><code>[[dataset.subsets]]</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image_dir</code></td>
+<td><code>‘C:\hoge’</code></td>
+<td>-</td>
+<td>-</td>
+<td>o（必须）</td>
+</tr>
+<tr>
+<td><code>caption_extension</code></td>
+<td><code>".txt"</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>class_tokens</code></td>
+<td><code>“sks girl”</code></td>
+<td>-</td>
+<td>-</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>cache_info</code></td>
+<td><code>false</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>is_reg</code></td>
+<td><code>false</code></td>
+<td>-</td>
+<td>-</td>
+<td>o</td>
+</tr>
+</tbody>
+</table>
+<p>首先需要注意的是，<code>image_dir</code> 必须指定图像文件直接位于该路径下。在传统的DreamBooth方法中，图像文件需要放在子目录下，但这里的规范与之不兼容。此外，即使文件夹名为 <code>5_cat</code>，也不会反映图像的重复次数和类别名称。如果需要单独设置这些，请使用 <code>num_repeats</code> 和 <code>class_tokens</code> 显式指定。</p>
+<ul>
+<li><code>image_dir</code><ul>
+<li>指定图像目录的路径。这是必须的选项。</li>
+<li>图像必须直接位于目录下。</li>
+</ul>
+</li>
+<li><code>class_tokens</code><ul>
+<li>设置类别标记。</li>
+<li>仅当图像对应的标题文件不存在时，才会在训练时使用。是否使用的判断是针对每个图像进行的。如果未指定 <code>class_tokens</code> 且标题文件也不存在，则会出错。</li>
+</ul>
+</li>
+<li><code>cache_info</code><ul>
+<li>指定是否缓存图像大小和标题。默认值为 <code>false</code>。缓存将保存在 <code>image_dir</code> 中的 <code>metadata_cache.json</code> 文件中。</li>
+<li>缓存可以加快第二次及以后读取数据集的速度。对于数千张以上的图像，启用此选项是有效的。</li>
+</ul>
+</li>
+<li><code>is_reg</code><ul>
+<li>指定子集中的图像是否为正则化图像。默认值为 <code>false</code>，即不是正则化图像。</li>
+</ul>
+</li>
+</ul>
+<h3 id="fine-tuning">仅适用于fine-tuning方式的选项</h3>
+<p>fine-tuning方式的选项仅存在于子集选项中。</p>
+<h4 id="_7">子集选项</h4>
+<p>这些选项与fine-tuning方式的子集设置相关。</p>
+<table>
+<thead>
+<tr>
+<th>选项名</th>
+<th>设置示例</th>
+<th><code>[general]</code></th>
+<th><code>[[datasets]]</code></th>
+<th><code>[[dataset.subsets]]</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>image_dir</code></td>
+<td><code>‘C:\hoge’</code></td>
+<td>-</td>
+<td>-</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>metadata_file</code></td>
+<td><code>'C:\piyo\piyo_md.json'</code></td>
+<td>-</td>
+<td>-</td>
+<td>o（必须）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+<p><code>image_dir</code></p>
+<ul>
+<li>
+<p>指定图像目录的路径。与DreamBooth方式不同，这里不是必须的，但建议指定。</p>
+<ul>
+<li>不需要指定的情况是，在生成元数据文件时，使用了 image_dir 以外的路径。</li>
+</ul>
+</li>
+<li>
+<p>图像必须直接位于目录下。</p>
+</li>
+<li><code>metadata_file</code></li>
+<li>指定子集中使用的元数据文件的路径。这是必须的选项。<ul>
+<li>与命令行参数 <code>--in_json</code> 等效。</li>
+</ul>
+</li>
+<li>由于子集需要单独指定元数据文件，因此不建议创建跨目录的元数据文件作为一个元数据文件。强烈建议为每个图像目录创建元数据文件，并将它们注册为不同的子集。</li>
+</ul>
+</li>
+</ul>
+<h3 id="caption-dropout">如果支持caption dropout，则可用的选项</h3>
+<p>如果训练方法支持caption dropout，则以下选项可用。这些选项仅存在于子集选项中。</p>
+<h4 id="_8">子集选项</h4>
+<p>这些选项与支持caption dropout的子集设置相关。</p>
+<table>
+<thead>
+<tr>
+<th>选项名</th>
+<th><code>[general]</code></th>
+<th><code>[[datasets]]</code></th>
+<th><code>[[dataset.subsets]]</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>caption_dropout_every_n_epochs</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>caption_dropout_rate</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+<tr>
+<td><code>caption_tag_dropout_rate</code></td>
+<td>o</td>
+<td>o</td>
+<td>o</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_9">子集重复时的行为</h2>
+<p>对于DreamBooth方式的数据集，如果其中存在 <code>image_dir</code> 相同的子集，则被视为重复，第二个及以后的子集将被忽略。
+对于fine-tuning方式的数据集，如果其中存在 <code>metadata_file</code> 相同的子集，则被视为重复，第二个及以后的子集将被忽略。</p>
+<p>然而，如果子集属于不同的数据集，则不被视为重复。
+例如，如果将具有相同 <code>image_dir</code> 的子集放在不同的数据集中，如下所示，则不会被视为重复。
+这在以不同分辨率训练同一图像时很有用。</p>
+<pre><code class="language-toml"># 如果存在于不同的数据集中，则不被视为重复，都会被用于训练
+
+[[datasets]]
+resolution = 512
+
+  [[datasets.subsets]]
+  image_dir = 'C:\hoge'
+
+[[datasets]]
+resolution = 768
+
+  [[datasets.subsets]]
+  image_dir = 'C:\hoge'
+</code></pre>
+<h2 id="_10">与命令行参数的结合使用</h2>
+<p>配置文件中的一些选项与命令行参数的选项具有相同的作用。</p>
+<p>以下命令行参数的选项在传递配置文件时将被忽略。</p>
+<ul>
+<li><code>--train_data_dir</code></li>
+<li><code>--reg_data_dir</code></li>
+<li><code>--in_json</code></li>
+</ul>
+<p>以下命令行参数的选项在同时通过命令行和配置文件指定时，配置文件的选项将优先。没有特别说明的均为同名选项。</p>
+<table>
+<thead>
+<tr>
+<th>命令行参数选项</th>
+<th>优先的配置文件选项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--bucket_no_upscale</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--bucket_reso_steps</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--caption_dropout_every_n_epochs</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--caption_dropout_rate</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--caption_extension</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--caption_tag_dropout_rate</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--color_aug</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--dataset_repeats</code></td>
+<td><code>num_repeats</code></td>
+</tr>
+<tr>
+<td><code>--enable_bucket</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--face_crop_aug_range</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--flip_aug</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--keep_tokens</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--min_bucket_reso</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--random_crop</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--resolution</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--shuffle_caption</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>--train_batch_size</code></td>
+<td><code>batch_size</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_11">错误指南</h2>
+<p>目前，我们使用外部库来检查配置文件是否正确书写，但由于维护不够，导致错误消息不够清晰。
+我们计划在将来解决这个问题。</p>
+<p>作为临时解决方案，我们列出了一些常见的错误及其解决方法。
+如果您确信配置正确却仍然出错，或者无法理解错误原因，请联系我们，因为可能是bug。</p>
+<ul>
+<li><code>voluptuous.error.MultipleInvalid: required key not provided @ ...</code>：这是一个错误，表明缺少必须的选项。可能是忘记指定或错误地书写了选项名称。</li>
+<li><code>...</code> 部分显示了错误发生的位置。例如，如果出现 <code>voluptuous.error.MultipleInvalid: required key not provided @ data['datasets'][0]['subsets'][0]['image_dir']</code>，则意味着第0个 <code>datasets</code> 中的第0个 <code>subsets</code> 缺少 <code>image_dir</code>。</li>
+<li><code>voluptuous.error.MultipleInvalid: expected int for dictionary value @ ...</code>：这是一个错误，表明值的格式不正确。可能是值的格式错误。<code>int</code> 部分会根据选项的不同而变化。本README中的“设置示例”可能会有所帮助。</li>
+<li><code>voluptuous.error.MultipleInvalid: extra keys not allowed @ ...</code>：当存在不支持的选项名称时，会发生此错误。可能是错误地书写了选项名称或误写了其他内容。</li>
+</ul>
+<h2 id="_12">其他</h2>
+<h3 id="_13">多行标题</h3>
+<p>设置 <code>enable_wildcard = true</code> 后，多行标题也会被启用。如果标题文件包含多行，则会随机选择一行作为标题。</p>
+<pre><code class="language-txt">1girl, hatsune miku, vocaloid, upper body, looking at viewer, microphone, stage
+a girl with a microphone standing on a stage
+detailed digital art of a girl with a microphone on a stage
+</code></pre>
+<p>也可以与通配符表示法结合使用。</p>
+<p>元数据文件也支持多行标题。在JSON中，使用 <code>\n</code> 表示换行。如果标题文件包含多行，使用 <code>merge_captions_to_metadata.py</code> 将创建这种格式的元数据文件。</p>
+<p>元数据中的标签 (<code>tags</code>) 将被添加到标题的每一行。</p>
+<pre><code class="language-json">{
+    &quot;/path/to/image.png&quot;: {
+        &quot;caption&quot;: &quot;a cartoon of a frog with the word frog on it\ntest multiline caption1\ntest multiline caption2&quot;,
+        &quot;tags&quot;: &quot;open mouth, simple background, standing, no humans, animal, black background, frog, animal costume, animal focus&quot;
+    },
+    ...
+}
+</code></pre>
+<p>在这种情况下，实际的标题可能是 <code>a cartoon of a frog with the word frog on it, open mouth, simple background ...</code> 或 <code>test multiline caption1, open mouth, simple background ...</code>、<code>test multiline caption2, open mouth, simple background ...</code> 等。</p>
+<h3 id="keep_tokens_separator">配置文件示例：附加分隔符、通配符表示法、<code>keep_tokens_separator</code> 等</h3>
+<pre><code class="language-toml">[general]
+flip_aug = true
+color_aug = false
+resolution = [1024, 1024]
+
+[[datasets]]
+batch_size = 6
+enable_bucket = true
+bucket_no_upscale = true
+caption_extension = &quot;.txt&quot;
+keep_tokens_separator= &quot;|||&quot;
+shuffle_caption = true
+caption_tag_dropout_rate = 0.1
+secondary_separator = &quot;;;;&quot; # 也可以写在subset侧
+enable_wildcard = true # 同上
+
+  [[datasets.subsets]]
+  image_dir = &quot;/path/to/image_dir&quot;
+  num_repeats = 1
+
+  # |||前后不需要逗号（会自动添加）
+  caption_prefix = &quot;1girl, hatsune miku, vocaloid |||&quot; 
+
+  # |||后面的部分不会被shuffle或drop
+  # 简单地作为字符串连接，因此需要自己添加逗号
+  caption_suffix = &quot;, anime screencap ||| masterpiece, rating: general&quot;
+</code></pre>
+<h3 id="secondary_separator-secondary_separator">标题示例，secondary_separator 表示法：<code>secondary_separator = ";;;"</code> 的情况</h3>
+<pre><code class="language-txt">1girl, hatsune miku, vocaloid, upper body, looking at viewer, sky;;;cloud;;;day, outdoors
+</code></pre>
+<p><code>sky;;;cloud;;;day</code> 部分不会被shuffle或drop，而是被替换为 <code>sky,cloud,day</code>。如果启用了shuffle或drop，则会作为一个标签整体处理。结果可能是 <code>vocaloid, 1girl, upper body, sky,cloud,day, outdoors, hatsune miku</code>（shuffle）或 <code>vocaloid, 1girl, outdoors, looking at viewer, upper body, hatsune miku</code>（drop后的情况）等。</p>
+<h3 id="enable_wildcard-true">标题示例，通配符表示法：<code>enable_wildcard = true</code> 的情况</h3>
+<pre><code class="language-txt">1girl, hatsune miku, vocaloid, upper body, looking at viewer, {simple|white} background
+</code></pre>
+<p>随机选择 <code>simple</code> 或 <code>white</code>，结果是 <code>simple background</code> 或 <code>white background</code>。</p>
+<pre><code class="language-txt">1girl, hatsune miku, vocaloid, {{retro style}}
+</code></pre>
+<p>如果要在标签字符串中包含 <code>{</code> 或 <code>}</code>，请像 <code>{{</code> 或 <code>}}</code> 这样写两次（在这个例子中，实际用于训练的标题是 <code>{retro style}</code>）。</p>
+<h3 id="keep_tokens_separator-keep_tokens_separator">标题示例，<code>keep_tokens_separator</code> 表示法：<code>keep_tokens_separator = "|||"</code> 的情况</h3>
+<pre><code class="language-txt">1girl, hatsune miku, vocaloid ||| stage, microphone, white shirt, smile ||| best quality, rating: general
+</code></pre>
+<p>结果可能是 <code>1girl, hatsune miku, vocaloid, microphone, stage, white shirt, best quality, rating: general</code> 或 <code>1girl, hatsune miku, vocaloid, white shirt, smile, stage, microphone, best quality, rating: general</code> 等。</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
